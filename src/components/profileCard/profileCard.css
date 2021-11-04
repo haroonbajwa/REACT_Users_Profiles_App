@@ -1,0 +1,12 @@
+.paper {
+    padding: 20px 0px;
+    border-radius: 40px;
+    background-color: rgb(231, 226, 226);
+}
+.userDetail {
+    font-size: 16px;
+}
+
+.userDetail a{
+    text-decoration: none;
+}
