@@ -5,6 +5,7 @@
 .user-details {
     font-size: large;
     line-height: 2rem;
+    padding: 0px !important;
 }
 
 .button {
@@ -26,4 +27,12 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+a {
+    text-decoration: none;
+}
+
+.title {
+    margin-top: 50px !important;
 }

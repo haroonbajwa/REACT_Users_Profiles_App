@@ -3,7 +3,6 @@ import { Button, Grid, Paper } from '@mui/material';
 
 import './profileCard.css';
 import { Link } from 'react-router-dom';
-import { returnSingleUserId } from '../../api/user';
 
 const ProfileCard = ({ user }) => {
     return (
