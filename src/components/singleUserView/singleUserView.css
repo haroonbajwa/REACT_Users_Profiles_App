@@ -1,0 +1,29 @@
+.container {
+    padding: 80px 50px;
+}
+
+.user-details {
+    font-size: large;
+    line-height: 2rem;
+}
+
+.button {
+    margin: 10px !important;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+td, th {
+    border: 2px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

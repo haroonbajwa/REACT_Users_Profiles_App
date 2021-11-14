@@ -20,7 +20,7 @@ export default function UsersGrid({ users }) {
     <Box sx={{ flexGrow: 1 }} style={{margin: '50px 0px'}}>
         <Grid container spacing={{ xs: 3, md: 5 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                 {users.map((user, i) => (
-                    <ProfileCard user={user} />
+                    <ProfileCard user={user} key={i} />
                 ))}
         </Grid>
     </Box>

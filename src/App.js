@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import AppBar from './components/appBar/AppBar';
 import UsersGrid from './components/usersGrid/UsersGrid';
+import SingleUserView from './components/singleUserView/SingleUserView';
 
-import posts from './api/users.js';
+import usersData from './api/users.js';
 
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
 
 
 function App() {
@@ -13,9 +15,9 @@ function App() {
 
   const getUsers = async () => {
     try {
-      const data = await posts.get();
+      const data = await usersData.get();
       setUsers(data.data);
-      console.log(users);
+      console.log(data.data);
     } catch(e) {
       console.log(e);
     }
@@ -27,9 +29,11 @@ function App() {
 
   return (
     <div className="App">
-      
       <AppBar />
-      <UsersGrid users={users} />
+      <Routes>
+        <Route exact path="/" element={<UsersGrid users={users} />} />
+        <Route path="/:id" element={<SingleUserView />} />
+      </Routes>
     </div>
   );
 }

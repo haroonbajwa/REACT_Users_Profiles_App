@@ -1,15 +1,17 @@
 import React from 'react';
-import { Button, Grid, Icon, Paper } from '@mui/material';
+import { Button, Grid, Paper } from '@mui/material';
 
 import './profileCard.css';
+import { Link } from 'react-router-dom';
+import { returnSingleUserId } from '../../api/user';
 
 const ProfileCard = ({ user }) => {
     return (
         
-        <Grid item xs={2} sm={4} md={4} key={user.id}>
+        <Grid item xs={2} sm={4} md={4}>
             <Paper className="paper" elevation={3}>
             <div>
-                <img src="https://img.icons8.com/office/80/000000/user.png"/>
+                <img src="https://img.icons8.com/office/80/000000/user.png" alt="user"/>
             </div>
             <div className="userDetail">
                 <p><b>Name:</b> {user.name}</p>
@@ -19,7 +21,11 @@ const ProfileCard = ({ user }) => {
                 <p><b>Email:</b> {user.email}</p>
                 <p><b>Website:</b> <a href={user.website}>{user.website}</a></p> */}
             </div>
-            <Button color="primary" variant="contained">More</Button>
+            <Link to={`/${user.id}`}  style={{textDecoration:'none', color:'white'}}>
+                <Button color="primary" variant="contained">
+                    More
+                </Button>
+            </Link>
             </Paper>
         </Grid>
         
