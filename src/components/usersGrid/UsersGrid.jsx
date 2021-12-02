@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import ProfileCard from '../profileCard/ProfileCard';
 
 import './usersGrid.css';
+import PostsPagination from '../pagination/UsersPagination';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -14,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function UsersGrid({ users }) {
+export default function UsersGrid({ users, pageNumber, setPageNumber, totalPages }) {
   return (
     <div className="usersGrid">
     <Box sx={{ flexGrow: 1 }} style={{margin: '50px 0px'}}>
@@ -24,6 +25,7 @@ export default function UsersGrid({ users }) {
                 ))}
         </Grid>
     </Box>
+    <PostsPagination pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={totalPages}/>
     </div>
   );
 }

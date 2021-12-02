@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import AppBar from './components/appBar/AppBar';
+import CircularProgress from '@mui/material/CircularProgress';
 import UsersGrid from './components/usersGrid/UsersGrid';
 import SingleUserView from './components/singleUserView/SingleUserView';
 
@@ -11,13 +12,21 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   
+  const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const usersPerPage = 6;
+  const [totalPages, setTotalPages] = useState();
+  const pagesVisited = (pageNumber-1) * usersPerPage;
 
   const getUsers = async () => {
     try {
+      setLoading(true);
       const data = await usersData.get();
-      setUsers(data.data);
-      console.log(data.data);
+      setUsers(data.data.slice(pagesVisited, pagesVisited + usersPerPage));
+      setTotalPages(Math.ceil(data.data.length / usersPerPage));
+      setLoading(false);
     } catch(e) {
       console.log(e);
     }
@@ -25,15 +34,24 @@ function App() {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [,pageNumber]);
+
 
   return (
     <div className="App">
       <AppBar />
-      <Routes>
-        <Route exact path="/" element={<UsersGrid users={users} />} />
+      {loading ? <CircularProgress /> :
+        <Routes>
+        <Route exact path="/"
+          element={<UsersGrid users={users}
+            setPageNumber={setPageNumber}
+            totalPages={totalPages}
+            pageNumber={pageNumber}
+            />} />
         <Route path="/:id" element={<SingleUserView />} />
       </Routes>
+      }
+      
     </div>
   );
 }
