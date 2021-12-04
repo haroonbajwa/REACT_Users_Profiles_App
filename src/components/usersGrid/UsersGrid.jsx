@@ -15,17 +15,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function UsersGrid({ users, pageNumber, setPageNumber, totalPages }) {
+export default function UsersGrid({ users, pageNumber, setPageNumber, totalPages, searchTerm }) {
   return (
     <div className="usersGrid">
     <Box sx={{ flexGrow: 1 }} style={{margin: '50px 0px'}}>
         <Grid container spacing={{ xs: 3, md: 5 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                {users.map((user, i) => (
+                {users.filter((val => {
+                  if(searchTerm === "") {
+                    return val;
+                  } else if(val.name.toLowerCase().includes(searchTerm?.toLowerCase())) {
+                    return val;
+                  }
+                })).map((user, i) => (
                     <ProfileCard user={user} key={i} />
                 ))}
         </Grid>
     </Box>
-    <PostsPagination pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={totalPages}/>
+    {searchTerm === "" && (
+      <PostsPagination pageNumber={pageNumber} setPageNumber={setPageNumber} totalPages={totalPages}/>
+    )}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { Button, Grid, Typography } from '@mui/material'
+import CircularProgress from '@mui/material/CircularProgress';
 
 import Post from './post/Post'
 
@@ -14,6 +15,8 @@ const SingleUserView = () => {
 
     const [profile, setProfile] = useState(null);
     const [postsData, setPostsData] = useState(null);
+
+    const [loading, setLoading] = useState(false);
 
     const { id } = useParams();
 
@@ -29,13 +32,18 @@ const SingleUserView = () => {
 
     useEffect(()=>{
         const getData = async () => {
+            setLoading(true);
             const data = await user(id);
             setProfile(data.data);
+            setLoading(false);
         }
         getData();
         getPosts();
     },[])
 
+    if(loading)
+        return <CircularProgress size="5rem" style={{marginTop:'50vh'}}/>
+        
     return (
         profile && (
         <>

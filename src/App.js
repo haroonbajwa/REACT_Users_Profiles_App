@@ -16,6 +16,8 @@ function App() {
   const [users, setUsers] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const usersPerPage = 6;
   const [totalPages, setTotalPages] = useState();
   const pagesVisited = (pageNumber-1) * usersPerPage;
@@ -39,14 +41,15 @@ function App() {
 
   return (
     <div className="App">
-      <AppBar />
-      {loading ? <CircularProgress /> :
+      <AppBar setSearchTerm={setSearchTerm} />
+      {loading ? <CircularProgress size="5rem" style={{marginTop:'50vh'}} /> :
         <Routes>
         <Route exact path="/"
           element={<UsersGrid users={users}
             setPageNumber={setPageNumber}
             totalPages={totalPages}
             pageNumber={pageNumber}
+            searchTerm={searchTerm}
             />} />
         <Route path="/:id" element={<SingleUserView />} />
       </Routes>
